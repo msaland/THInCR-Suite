@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Yang Tang" />
+
+<meta name="date" content="2022-02-03" />
+
+<title>Introduction to shinyjqui</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to shinyjqui</h1>
+<h4 class="author">Yang Tang</h4>
+<h4 class="date">2022-02-03</h4>
+
+
+
+<p><code>shinyjqui</code> package provides APIs to the <code>jQuery UI</code> JavaScript library that can be used to add mouse-interactions and animation effects to shiny apps. The vignette provides general introductions and some examples.</p>
+<div id="mouse-interaction-functions" class="section level2">
+<h2>Mouse interaction functions</h2>
+<p>There are five kinds of mouse interactions in <code>jQuery UI</code> library:</p>
+<ul>
+<li><p><strong>Draggable:</strong> Allow elements to be moved using the mouse.</p></li>
+<li><p><strong>Droppable:</strong> Create targets for draggable elements.</p></li>
+<li><p><strong>Resizable:</strong> Change the size of an element using the mouse.</p></li>
+<li><p><strong>Selectable:</strong> Use the mouse to select elements, individually or in a group.</p></li>
+<li><p><strong>Sortable:</strong> Reorder elements in a list or grid using the mouse.</p></li>
+</ul>
+<p><code>shinyjqui</code> provides corresponding R functions: <code>jqui_draggable()</code>, <code>jqui_droppable()</code>, <code>jqui_resizable()</code>, <code>jqui_selectable()</code> and <code>jqui_sortable()</code>. These interaction functions can be used in shiny apps to add mouse interaction effects to HTML elements.</p>
+<div id="the-ui-mode-and-server-mode" class="section level3">
+<h3>The ui mode and server mode</h3>
+<p>The interaction functions can be used in the <code>ui</code> definition (ui mode) or the <code>server</code> function (server mode)</p>
+<p>In <code>ui</code> definition, you can wrap any shiny ui object (tag, tagList, input or output) with the interaction function like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a draggable textInput in shiny ui</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">jqui_draggable</span>(<span class="fu">textInput</span>(<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;Input&quot;</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>The function returns a modified shiny ui with the corresponding interaction effect attached.</p>
+<p>You can use interaction functions inside the <code>server</code> function too. In this case, depends on the <code>operation</code> parameter, the functions add, modify or remove the interaction effect of an existing (pre-defined in <code>ui</code>) ui element:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a textInput in shiny ui without mouse interaction</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;Input&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># make the ui element with id &quot;foo&quot; draggable</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">jqui_draggable</span>(<span class="at">ui =</span> <span class="st">&quot;#foo&quot;</span>, <span class="at">operation =</span> <span class="st">&quot;enable&quot;</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The ui mode is the most straightforward way to create an ui element with mouse interactions, however, the server mode is more flexible. 1) You can reactively control element’s interaction effect through <code>observe()</code> or <code>observEvent()</code>; 2) You can use a <a href="https://api.jquery.com/category/selectors/">jQuery_selector</a> or even a JavaScript expression to locate multiple target elements; 3) You can control the interaction effects with the <code>operation</code> parameter. (see the <code>operation</code> parameter section below).</p>
+</div>
+<div id="the-ui-parameter" class="section level3">
+<h3>The <code>ui</code> parameter</h3>
+<p>The first parameter of interaction functions is <code>ui</code>. It determines the target element(s) to manipulate. Based on the working mode, it accepts different object types.</p>
+<p>In <code>ui</code> mode, as mentioned above, you can pass a shiny ui object with class <code>shiny.tag</code> or <code>shiny.tag.list</code>. For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># shiny input</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_draggable</span>(<span class="at">ui =</span> <span class="fu">textInput</span>(<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;Caption&quot;</span>, <span class="st">&quot;Data Summary&quot;</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># shiny output</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_resizable</span>(<span class="at">ui =</span> <span class="fu">plotOutput</span>(<span class="st">&quot;myplot&quot;</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># HTML list</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_sortable</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">ui =</span> tags<span class="sc">$</span><span class="fu">ul</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    tags<span class="sc">$</span><span class="fu">li</span>(<span class="st">&quot;Coffice&quot;</span>), </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    tags<span class="sc">$</span><span class="fu">li</span>(<span class="st">&quot;Tea&quot;</span>), </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    tags<span class="sc">$</span><span class="fu">li</span>(<span class="st">&quot;Milk&quot;</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>In <code>server</code> mode, you can pass a string of <a href="https://api.jquery.com/category/selectors/">jQuery_selector</a>. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># target multiple HTML elements by passing a set of ids</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_draggable</span>(<span class="at">ui =</span> <span class="st">&quot;#id1,#id2,#id3&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># target all the shiny `plotOuput`s by passing the class `shiny-plot-output`</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_resizable</span>(<span class="at">ui =</span> <span class="st">&quot;.shiny-plot-output&quot;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># target all &lt;p&gt; elements where the parent is a &lt;div&gt; element</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_draggable</span>(<span class="at">ui =</span> <span class="st">&quot;div &gt; p&quot;</span>)</span></code></pre></div>
+<p>Or even more flexible, you can use the <code>htmlwidgets::JS()</code> function to wrap a custom javascript expression that returns a jQuery object. For example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># target all the child elements whose parent has the id `foo`</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_draggable</span>(<span class="at">ui =</span> <span class="fu">JS</span>(<span class="st">&quot;$(&#39;#foo&#39;).children()&quot;</span>))</span></code></pre></div>
+<p>From <code>shinyjqui</code> v0.4.0, the interaction functions can work on static htmlwidgets. For example, you can pass a <code>plotly</code> htmlwidget object:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># render a resizable plotly htmlwidget in RStudio Viewer or RMarkdown</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_resizable</span>(<span class="at">ui =</span> <span class="fu">plot_ly</span>(<span class="at">z =</span> <span class="sc">~</span>volcano, <span class="at">type =</span> <span class="st">&quot;surface&quot;</span>))</span></code></pre></div>
+</div>
+<div id="the-operation-parameter" class="section level3">
+<h3>The <code>operation</code> parameter</h3>
+<p>The parameter is for <code>server</code> mode only. It determines how to manipulate the interaction. The following five options are supported:</p>
+<ul>
+<li><code>enable</code>: Initiate the corresponding mouse interaction to the target(s) (the default option).</li>
+<li><code>disable</code>: Initiate the interaction if not and temporarily disable it (by only setting the JS options).</li>
+<li><code>destroy</code>: Completely remove the interaction.</li>
+<li><code>save</code>: Initiate the interaction if not and save the current interaction state.</li>
+<li><code>load</code>: Initiate the interaction if not and restore the target(s) to an user defined interaction state or the last saved state.</li>
+</ul>
+<p>The <code>save</code> and <code>load</code> options were included from v0.3.0. They can be used to save and restore the state (e.g. size, position, order) of an element. You can find more details in the Vignette <code>Save and restore</code>.</p>
+</div>
+<div id="the-options-parameter" class="section level3">
+<h3>The <code>options</code> parameter</h3>
+<p>The <code>options</code> parameter can be used to further specify the behavior of interaction. A complete list of the available options for each interaction can be found in jQuery UI’s <a href="https://api.jqueryui.com/category/interactions/">API Documentation</a> page. Here are some examples:</p>
+<div id="draggable" class="section level4">
+<h4>Draggable</h4>
+<p>Draggable elements can be moved by mouse. You can custom its movement by some options:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drag only horizontally</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_draggable</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">axis =</span> <span class="st">&#39;x&#39;</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># make movement snapping to a 80 x 80 grid</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_draggable</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">grid =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">80</span>)))</span></code></pre></div>
+</div>
+<div id="droppable" class="section level4">
+<h4>Droppable</h4>
+<p>With the droppable interaction enabled, the element can sense the behavior of accepted draggable elements and make changes (e.g. change display style) accordingly:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_droppable</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">accept =</span> <span class="st">&#39;#bar&#39;</span>, <span class="co"># jQuery selector to define which draggable element to monitor. Accept anything if not set.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">classes =</span> <span class="fu">list</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ui-droppable-active</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;ui-state-focus&#39;</span>, <span class="co"># change class when draggable element is dragging</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ui-droppable-hover</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;ui-state-highlight&#39;</span> <span class="co"># change class when draggable element is dragging over</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop =</span> <span class="fu">JS</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;function(event, ui){$(this).addClass(&quot;ui-state-active&quot;);}&#39;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="co"># a javascrip callback to change class when draggable element is dropped in</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<p>When passing a JavaScript callback function to the <code>options</code> parameter, please wrap it with <code>JS()</code> so that it can be evaluated correctly.</p>
+</div>
+<div id="resizable" class="section level4">
+<h4>Resizable</h4>
+<p>You can change the size of a resizable element by dragging the resize-handles around it. Several examples are listed here:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep aspect ratio when resizing</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_resizable</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">aspectRatio =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Limit the resizable element to a maximum or minimum height or width</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_resizable</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">minHeight =</span> <span class="dv">100</span>, <span class="at">maxHeight =</span> <span class="dv">300</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">minWidth =</span> <span class="dv">200</span>, <span class="at">maxWidth =</span> <span class="dv">400</span>))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># make the two plotOutputs resize synchronously</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_resizable</span>(<span class="fu">plotOutput</span>(<span class="st">&#39;plot1&#39;</span>, <span class="at">width =</span> <span class="st">&#39;400px&#39;</span>, <span class="at">height =</span> <span class="st">&#39;400px&#39;</span>), </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">options =</span> <span class="fu">list</span>(<span class="at">alsoResize =</span> <span class="st">&#39;#plot2&#39;</span>)),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plotOutput</span>(<span class="st">&#39;plot2&#39;</span>, <span class="at">width =</span> <span class="st">&#39;400px&#39;</span>, <span class="at">height =</span> <span class="st">&#39;400px&#39;</span>)</span></code></pre></div>
+</div>
+<div id="selectable" class="section level4">
+<h4>Selectable</h4>
+<p>The selectable interaction makes the target element’s children selectable. You can select by click, Ctrl+click or dragging a box (lasso selection). The selected elements may change display styles if specified in <code>options</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># highlight the selected plotOutput</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_selectable</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">div</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="st">&#39;plot1&#39;</span>, <span class="at">width =</span> <span class="st">&#39;400px&#39;</span>, <span class="at">height =</span> <span class="st">&#39;400px&#39;</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="st">&#39;plot2&#39;</span>, <span class="at">width =</span> <span class="st">&#39;400px&#39;</span>, <span class="at">height =</span> <span class="st">&#39;400px&#39;</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(<span class="at">classes =</span> <span class="fu">list</span>(<span class="st">`</span><span class="at">ui-selected</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&#39;ui-state-highlight&#39;</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div id="sortable" class="section level4">
+<h4>Sortable</h4>
+<p>The sortable interaction makes the target element’s children sortable. You can rearrange them by drag and drop. Some examples here:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change opacity while sorting</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_sortable</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">opacity =</span> <span class="fl">0.5</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># only items with class &quot;items&quot; inside the element become sortable</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_sortable</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">items =</span> <span class="st">&#39;&gt; .items&#39;</span>))</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># connect two sortable elements, so that items in one element can be dragged to another</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_sortable</span>(<span class="st">&#39;#foo1&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">connectWith =</span> <span class="st">&#39;#foo2&#39;</span>))</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_sortable</span>(<span class="st">&#39;#foo2&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">connectWith =</span> <span class="st">&#39;#foo1&#39;</span>))</span></code></pre></div>
+</div>
+</div>
+<div id="the-input-values-and-shiny-options" class="section level3">
+<h3>The input values and <code>shiny</code> options</h3>
+<p>In shiny, the user input values are sent back to the server in the form of <code>input$&lt;id&gt;</code>. Similarly, the interaction functions can send back interaction-specific state values in the form of <code>input$&lt;id&gt;_&lt;suffix&gt;</code>, where the <code>id</code> is the element id (<code>id</code> attribute for shiny tag, <code>inputId</code> for shiny inputs, <code>outputId</code> for shiny outputs) and the <code>suffix</code> depends on the type of interaction enabled. The table below shows the currently deployed interaction state values:</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="20%" />
+<col width="67%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Interaction_type</th>
+<th align="left">Shiny_input</th>
+<th align="left">Value_returned</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">draggable</td>
+<td align="left">input$&lt;id&gt;_position</td>
+<td align="left">A list of the element’s left and top distances (in pixels) to its parent element</td>
+</tr>
+<tr class="even">
+<td align="left">draggable</td>
+<td align="left">input$&lt;id&gt;_is_dragging</td>
+<td align="left">TRUE or FALSE that indicate whether the element is dragging</td>
+</tr>
+<tr class="odd">
+<td align="left">droppable</td>
+<td align="left">input$&lt;id&gt;_dragging</td>
+<td align="left">The id of an acceptable element that is now dragging</td>
+</tr>
+<tr class="even">
+<td align="left">droppable</td>
+<td align="left">input$&lt;id&gt;_over</td>
+<td align="left">The id of the last acceptable element that is dragged over</td>
+</tr>
+<tr class="odd">
+<td align="left">droppable</td>
+<td align="left">input$&lt;id&gt;_drop</td>
+<td align="left">The id of the last acceptable element that is dropped</td>
+</tr>
+<tr class="even">
+<td align="left">droppable</td>
+<td align="left">input$&lt;id&gt;_dropped</td>
+<td align="left">The ids of all acceptable elements that is currently dropped</td>
+</tr>
+<tr class="odd">
+<td align="left">droppable</td>
+<td align="left">input$&lt;id&gt;_out</td>
+<td align="left">The id of the last acceptable element that is dragged out</td>
+</tr>
+<tr class="even">
+<td align="left">resizable</td>
+<td align="left">input$&lt;id&gt;_size</td>
+<td align="left">A list of the element’s current size</td>
+</tr>
+<tr class="odd">
+<td align="left">resizable</td>
+<td align="left">input$&lt;id&gt;_is_resizing</td>
+<td align="left">TRUE or FALSE that indicate whether the element is being resized</td>
+</tr>
+<tr class="even">
+<td align="left">selectable</td>
+<td align="left">input$&lt;id&gt;_selected</td>
+<td align="left">A dataframe containing the id and innerText of curently selected items</td>
+</tr>
+<tr class="odd">
+<td align="left">selectable</td>
+<td align="left">input$&lt;id&gt;_is_selecting</td>
+<td align="left">TRUE or FALSE that indicate whether the element is selecting (e.g. during lasso selection)</td>
+</tr>
+<tr class="even">
+<td align="left">sortable</td>
+<td align="left">input$&lt;id&gt;_order</td>
+<td align="left">A dataframe containing the id and innerText of items in the current order</td>
+</tr>
+</tbody>
+</table>
+<p>You can even customize the returned values by including a <code>shiny</code> option in the <code>options</code> parameter. The <code>shiny</code> option should be created in the following format:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>shiny_opt <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define shiny input value input$id_suffix1</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">suffix1 =</span> <span class="fu">list</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># on event_type1 run callback1 and send the returned value to input$id_suffix1</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">event_type1 =</span> <span class="fu">JS</span>(callback1),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># on event_type2 or event_type3 run callback2 and send the returned value to input$id_suffix1</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">event_type2 event_type3</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">JS</span>(callback2),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define another shiny input value input$id_suffix2</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">suffix2 =</span> <span class="fu">list</span>(</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># define more shiny input values</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># pass the shiny option to an interaction function</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_draggable</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">shiny =</span> shiny_opt, </span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#other draggable-specific options</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<p>The <code>shiny</code> option is defined by a list of event-callback pairs named with <code>suffix</code>.The valid event types for each interactions can be found in the <a href="https://api.jqueryui.com/category/interactions/">API Documentation</a> of jQuery UI.The callback should be wrapped with <code>JS()</code>. The JS callback functions take two parameters, <code>event</code> and <code>ui</code>. The definition of the <code>ui</code> parameter can also be found in the API document too. Here is an example:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># server</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_draggable</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">shiny =</span> <span class="fu">list</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># By default, draggable element has a shiny input value showing the</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># element&#39;s position (relative to the parent element). Here, another shiny</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># input value (input$foo_offset) is added. It returns the element&#39;s offset</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (position relative to the document).</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">offset =</span> <span class="fu">list</span>(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># return the updated offset value when the draggable is created or dragging</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">dragcreate drag</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">JS</span>(<span class="st">&#39;function(event, ui) {return $(event.target).offset();}&#39;</span>),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<p>When using the <code>shiny</code> option and callbacks, you may want to get the id of a certain element in JavaScript. For simple shiny tags (e.g. <code>tags$div</code>), <code>element.attr(&quot;id&quot;)</code> just works fine, however, things become more complicated for shiny inputs (e.g. <code>textInput</code>). The id attribute of most shiny inputs is hidden inside a div container. You may use the jQuery function <code>.find()</code> to locate it. The <code>shinyjqui</code> package comes with an internal JavaScript function <code>shinyjqui.getId()</code> which will take care of this. You can just simply pass in any shiny element, either simple tag, shiny input or shiny output. It will use the appropriate way to find out the id.</p>
+</div>
+</div>
+<div id="animation-effects" class="section level2">
+<h2>Animation effects</h2>
+<p>jQuery UI library comes with 15 internal animation effects. You can get a full list of them by R function <code>get_jqui_effects()</code>:</p>
+<pre><code>#&gt;  [1] &quot;blind&quot;     &quot;bounce&quot;    &quot;clip&quot;      &quot;drop&quot;      &quot;explode&quot;   &quot;fade&quot;     
+#&gt;  [7] &quot;fold&quot;      &quot;highlight&quot; &quot;puff&quot;      &quot;pulsate&quot;   &quot;scale&quot;     &quot;shake&quot;    
+#&gt; [13] &quot;size&quot;      &quot;slide&quot;     &quot;transfer&quot;</code></pre>
+<p>There is a live demo for each effect <a href="https://jqueryui.com/effect/">here</a>. By use following functions, you can apply these effects to a shiny ui element as well:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Functions</th>
+<th align="left">Description</th>
+<th align="left">Where_to_use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">jqui_effect</td>
+<td align="left">Let element(s) to show an animation immediately.</td>
+<td align="left">server</td>
+</tr>
+<tr class="even">
+<td align="left">jqui_show</td>
+<td align="left">Display hidden element(s) with an animation</td>
+<td align="left">server</td>
+</tr>
+<tr class="odd">
+<td align="left">jqui_hide</td>
+<td align="left">Hide element(s) with an animation</td>
+<td align="left">server</td>
+</tr>
+<tr class="even">
+<td align="left">jqui_toggle</td>
+<td align="left">Display or hide element(s) with an animation</td>
+<td align="left">server</td>
+</tr>
+</tbody>
+</table>
+<p>The above functions work only in server mode.</p>
+<p>The <code>effect</code> parameter accepts a string that defines which animation effect to apply. Note: The <code>transfer</code> effect can only be used in <code>jqui_effect()</code>.</p>
+<p>The <code>options</code> parameter accepts a list of effect specific options. Please find more details <a href="https://api.jqueryui.com/category/effects/">here</a>.</p>
+<p>The <code>complete</code> parameter accepts a JavaScript callback function which will be called after the animation. Please wrap it with <code>JS()</code>.</p>
+<p>Here are some examples:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ui</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotOutput</span>(<span class="st">&#39;foo&#39;</span>, <span class="at">width =</span> <span class="st">&#39;400px&#39;</span>, <span class="at">height =</span> <span class="st">&#39;400px&#39;</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># server</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_effect</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">effect =</span> <span class="st">&#39;bounce&#39;</span>) <span class="co"># bounces the plot</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_effect</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">effect =</span> <span class="st">&#39;scale&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">percent =</span> <span class="dv">50</span>)) <span class="co"># scale to 50%</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_hide</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">effect =</span> <span class="st">&#39;size&#39;</span>, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">width =</span> <span class="dv">200</span>, <span class="at">height =</span> <span class="dv">60</span>)) <span class="co"># resize then hide</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jqui_show</span>(<span class="st">&#39;#foo&#39;</span>, <span class="at">effect =</span> <span class="st">&#39;clip&#39;</span>) <span class="co"># show the plot by clipping</span></span></code></pre></div>
+</div>
+<div id="classes-animation" class="section level2">
+<h2>Classes animation</h2>
+<p>These functions can be used to change shiny element’s class(es) while animating all style changes:</p>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="70%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Functions</th>
+<th align="left">Description</th>
+<th align="left">Where_to_use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">jqui_add_class</td>
+<td align="left">Add class(es) to element(s) while animating all style changes.</td>
+<td align="left">server</td>
+</tr>
+<tr class="even">
+<td align="left">jqui_remove_class</td>
+<td align="left">Remove class(es) from element(s) while animating all style changes.</td>
+<td align="left">server</td>
+</tr>
+<tr class="odd">
+<td align="left">jqui_switch_class</td>
+<td align="left">Add and remove class(es) to element(s) while animating all style changes.</td>
+<td align="left">server</td>
+</tr>
+</tbody>
+</table>
+<p>Similar to the animation effects functions, these functions are all server-only.</p>
+<p>The <code>easing</code> parameter defines the speed style of the animation progresses. More details can be found <a href="https://api.jqueryui.com/easings/">here</a></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
