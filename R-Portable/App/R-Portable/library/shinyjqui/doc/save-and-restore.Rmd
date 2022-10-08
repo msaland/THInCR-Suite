@@ -1,0 +1,151 @@
+---
+title: "Save and restore"
+author: "Yang Tang"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Save and restore}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette introduces the save and restore feature of the mouse-interaction functions.
+
+## What can be save and restored?
+
+It is based on the type of interactions. See the following table:
+
+```{r, echo=FALSE, results='asis'}
+tbl <- data.frame(
+  Interactions = c("draggable", "resizable", "selectable", "sortable"),
+  State = c(
+    "The position of the draggable element",
+    "The dimension of the resizable element",
+    "The selected items inside the selectable element",
+    "The order of items inside the sortable element"
+  )
+)
+knitr::kable(tbl)
+```
+
+
+## How to save and restore inside a shiny session (client-side)?
+
+This is the case when users want to temporarily save the current interaction state (e.g., position of element) and restore it later in the same shiny session (without closing the app or reloading the page). The interaction functions offer the `save` and `load` operations to serve the purpose:
+
+```{r, eval=FALSE}
+ui <- fluidPage(
+  actionButton("save", "Save position"),
+  actionButton("restore", "Restore position"),
+  # create a draggable textInput
+  jqui_draggable(textInput("foo", "Textinput"))
+)
+
+server <- function(input, output) {
+  # on save button clicked, save the current position of the textInput
+  observeEvent(input$save, {
+    jqui_draggable("#foo", operation = "save")
+  })
+  # on restore button clicked, move the textInput back to the last saved position
+  observeEvent(input$restore, {
+    jqui_draggable("#foo", operation = "load")
+  })
+}
+
+shinyApp(ui, server)
+```
+
+The operations also work in `orderInput()`, `selectableTableOutput()` and `sortableTabsetPanel()`. For example,
+
+```{r, eval=FALSE}
+ui <- fluidPage(
+  actionButton("save", "Save order"),
+  actionButton("restore", "Restore order"),
+  orderInput("foo1", label = NULL, items = 1:3, connect = "foo2"),
+  orderInput("foo2", label = NULL, items = NULL, placeholder = "empty")
+)
+
+server <- function(input, output) {
+  observeEvent(input$save, {
+    jqui_sortable("#foo1,#foo2", operation = "save")
+  })
+  observeEvent(input$restore, {
+    jqui_sortable("#foo1,#foo2", operation = "load")
+  })
+}
+
+shinyApp(ui, server)
+```
+
+The `load` operation can also work independently to load an user-defined-state if a `state` option exists.
+```{r, eval=FALSE}
+ui <- fluidPage(
+  actionButton("s", "Small"),
+  actionButton("m", "Medium"),
+  actionButton("l", "Large"),
+  jqui_resizable(plotOutput('gg', width = '200px', height = '200px'))
+)
+
+server <- function(input, output) {
+  output$gg <- renderPlot({
+    ggplot(mtcars, aes(x = cyl, y = mpg)) + geom_point()
+  })
+  observeEvent(input$s, 
+               jqui_resizable(
+                 ui        = "#gg", 
+                 operation = "load", 
+                 options   = list(state = list(width  = 100, height = 100))
+               )
+  )
+  observeEvent(input$m, 
+               jqui_resizable(
+                 ui        = "#gg", 
+                 operation = "load", 
+                 options   = list(state = list(width  = 200, height = 200))
+               )
+  )
+  observeEvent(input$l, 
+               jqui_resizable(
+                 ui        = "#gg", 
+                 operation = "load", 
+                 options   = list(state = list(width  = 400, height = 400))
+               )
+  )
+}
+
+shinyApp(ui, server)
+```
+
+
+## How to save and restore between shiny sessions (shiny bookmarking)?
+
+In addition to the client-side mode, cross-session save/restore is also supported, which takes advantage of [shiny bookmarking](https://shiny.rstudio.com/articles/bookmarking-state.html). In this case, users can save the interaction state alone with other shiny input values either by URL-encoding or by save-to-server, and restore them in another shiny session. The only thing needed to do is to include a `jqui_bookmarking()` call in server function. All the other operations are the same as the native shiny bookmarking:
+
+```{r, eval=FALSE}
+
+ui <- function(request) {
+  fluidPage(
+    bookmarkButton(),
+    jqui_resizable(plotOutput('gg', width = '200px', height = '200px'))
+  )
+}
+
+server <- function(input, output) {
+  output$gg <- renderPlot({
+    ggplot(mtcars, aes(x = cyl, y = mpg)) + geom_point()
+  })
+  # enable interaction state bookmarking
+  jqui_bookmarking()
+}
+
+enableBookmarking(store = "url")
+
+shinyApp(ui, server)
+```

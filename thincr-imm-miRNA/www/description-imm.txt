@@ -1,0 +1,163 @@
+=========================================================================================================================
+Brief descriptions of the 53 immune landscape features analyzed as part of the immune features landscape tools in THInCR.
+=========================================================================================================================
+
+Aneuploidy Score
+This measurement of genomic integrity represents the total number of chromosome arms with arm-level copy-number alterations.
+
+B Cells Memory
+This measurement reflects relative memory B cell enrichment based on gene expression and/or methylation signatures.
+
+B Cells Naive	
+This measurement reflects relative naive B cell enrichment based on gene expression and/or methylation signatures.
+
+BCR Evenness	
+This measurement reflects the relative clonality of B cell receptors (BCR).
+
+BCR Richness	
+This measurement reflects relative the abundance of unique clones for B cell receptors (BCR).
+
+BCR Shannon	
+The Shannon Entropy Index reflects a combination of evenness and richness scores for B cell receptors (BCR).
+
+CTA Score	
+This measurement reflects the relative expression score of cancer testis antigens (CTA).
+
+Dendritic Cells	
+This measurement reflects relative dendritic cell enrichment based on gene expression and/or methylation signatures.
+
+Dendritic Cells Activated	
+This measurement reflects relative activated dendritic cell enrichment based on gene expression and/or methylation signatures.
+
+Dendritic Cells Resting	
+This measurement reflects relative resting dendritic cell enrichment on gene expression and/or methylation signatures.
+
+Eosinophils	
+This measurement reflects relative eosinophil enrichment based on gene expression and/or methylation signatures.
+
+Fraction Altered	
+This measurement reflects the relative fraction of a tumor genome that exhibits copy number alteration.
+
+Homologous Recombination Defects	
+This measurement reflects the relative level of DNA Damage by measuring 3 components of genomic scarring (subtelomeric regions with allelic imbalance, large-scale state transitions, and loss of heterozygosity)
+
+IFN gamma Response	
+This measurement reflects the relative expression of a gene signature reflecting the relative activity of the IFN-gamma pathway.
+
+Indel Neoantigens	
+This measurement reflects the total number of insertion/deletion (indel) neoantigens.
+
+Intratumor Heterogeneity	
+This measurement reflects the relative variability/heterogeneity of gene expression within a tumor mass.
+
+Leukocyte Fraction	
+This measurement reflects the relative levels of leukocyte types in the tumor based on gene expression and/or methylation signatures within a tumor mass.
+
+Lymphocyte Infiltration Signature Score	
+This measurement reflects the relative expression of a gene signature reflecting the relative level of lymphocyte infiltration.
+
+Lymphocytes	
+This measurement reflects the relative levels of all lymphocyte types in the tumor based on gene expression and/or methylation signatures.
+
+Macrophage Regulation	
+This measurement reflects the relative expression of a gene signature reflecting the relative level of macrophage regulation.
+
+Macrophages	
+This measurement reflects the relative levels of all macrophage types in the tumor based on gene expression and/or methylation signatures.
+
+Macrophages M0	
+This measurement reflects the relative level of M0 macrophage enrichment based on gene expression and/or methylation signatures.
+
+Macrophages M1	
+This measurement reflects the relative level of M1 macrophage enrichment based on gene expression and/or methylation signatures.
+
+Macrophages M2	
+This measurement reflects the relative level of M2 macrophage enrichment based on gene expression and/or methylation signatures.
+
+Mast Cells	
+This measurement reflects the relative level of total Mast cell enrichment based on gene expression and/or methylation signatures.
+
+Mast Cells Activated	
+This measurement reflects the relative level of Activated mast cell enrichment based on gene expression and/or methylation signatures.
+
+Mast Cells Resting	
+This measurement reflects the relative level of resting mast cell enrichment based on gene expression and/or methylation signatures.
+
+Monocytes	
+This measurement reflects the relative levels of total monocyte enrichment based on gene expression and/or methylation signatures.
+
+Neutrophils	
+This measurement reflects the relative level of neutrophil enrichment based on gene expression and/or methylation signatures.
+
+NK Cells Activated	
+This measurement reflects the relative levels of activated NK cell enrichment based on gene expression and/or methylation signatures
+
+NK Cells Resting	
+This measurement reflects the relative levels of resting NK cell enrichment based on gene expression and/or methylation signatures.
+
+Nonsilent Mutation Rate	
+This DNA damage measurement reflects the relative rate of non-silent mutations.
+
+Number of Segments	
+This measurement of DNA damage reflects the number of segments in the context of copy number variation burden.
+
+Plasma Cells	
+This measurement reflects the relative level of plasma cell enrichment based on gene expression and/or methylation signatures.
+
+Proliferation	
+This measurement reflects the relative level of overall cell proliferation.
+
+Silent Mutation Rate	
+This measurement of DNA damage reflects the rate of silent mutations.
+
+SNV Neoantigens	
+This measurement of DNA damage reflects the total number of single nucleotide variants (SNV) neoantigens.
+
+Stromal Fraction	
+This measurement reflects the relative overall stromal cell fraction based on gene expression and/or methylation signatures within a tumor mass.
+
+T Cells CD4 Memory Activated	
+This measurement reflects the relative level of activated memory CD4 T cell enrichment based on gene expression and/or methylation signatures.
+
+T Cells CD4 Memory Resting	
+This measurement reflects the relative level of resting memory CD4 T cell enrichment based on gene expression and/or methylation signatures.
+
+T Cells CD4 Naive	
+This measurement reflects the relative level of naive CD4 T cell enrichment based on gene expression and/or methylation signatures.
+
+T Cells CD8	
+This measurement reflects the relative level of CD8 T cell enrichment based on gene expression and/or methylation signatures.
+
+T Cells Follicular Helper	
+This measurement reflects the relative level of follicular Helper T cell enrichment based on gene expression and/or methylation signatures.
+
+T Cells gamma delta	
+This measurement reflects the relative level of gamma delta T cell enrichment based on gene expression and/or methylation signatures.
+
+T Cells Regulatory Tregs	
+This measurement reflects the relative level of regulatory T cell (Treg) enrichment based on gene expression and/or methylation signatures.
+
+TCR Evenness	
+This measurement reflects the relative level of clonality for T cell receptors (TCR).
+
+TCR Richness	
+This measurement reflects the relative level of abundance of unique clones for T cell receptors (TCR).
+
+TCR Shannon	
+The Shannon Entropy Index reflects a combination of evenness and richness scores for T cell receptors (TCR).
+
+TGF beta Response	
+This measurement reflects the relative expression of a gene signature reflecting the relative activity of the TGF-beta pathway.
+
+Th1 Cells	
+This measurement reflects the relative expression of a gene signature reflecting a Th1 directed immune response.
+
+Th17 Cells	
+This measurement reflects the relative expression of a gene signature reflecting a Th17 directed immune response.
+
+Th2 Cells	
+This measurement reflects the relative expression of a gene signature reflecting a Th2 directed immune response.
+
+Wound Healing	
+This measurement reflects the relative expression of a gene signature characterized as "wound-like phenotype" or "fibroblast serum response".
+
