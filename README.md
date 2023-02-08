@@ -6,7 +6,7 @@ We also offer a web version of this tool suite at https://thincr.ca/
 
 ## Citing
 
-Salnikov et al., 2022, The HPV Induced Cancer Resource (THInCR): a Suite of Tools for Investigating HPV-Dependent Human Carcinogenesis, mSphere, In Press.
+Salnikov M, Gameiro SF, Zeng PYF, Barrett JW, Nichols AC, Mymryk JS. 2022. The HPV Induced Cancer Resource (THInCR): a Suite of Tools for Investigating HPV-Dependent Human Carcinogenesis. mSphere. 7(4): e0031722.
 
 ## Installation
 
