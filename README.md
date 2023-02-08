@@ -2,7 +2,7 @@
 
 ## Web Version
 
-We also offer a web version of this tool suite at https://thincr.ca/ (redirects to our new website at https://mymryklab.ca/; if you want to use THInCR, please use this link instead: https://mymryklab.ca/THInCR/thincr-home/)
+We also offer a web version of this tool suite at https://thincr.ca/ (redirects to our new website at https://mymryklab.ca/; if you want to use THInCR, please use this link instead: https://mymryklab.ca/THInCR/thincr-home/).
 
 ## Citing
 
