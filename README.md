@@ -24,8 +24,8 @@ In order to run the tools, run the .vbs files. A total of 9 (5 unique) tools are
 
 1. **run-THInCR-correlation-miRNA.vbs**: </br> Correlation of cellular miRNA expression and HPV gene expression for CESC and HNSC datasets of TCGA.
 2. **run-THInCR-correlation-mRNA.vbs**: </br> Correlation of cellular mRNA expression and HPV gene expression for CESC and HNSC datasets of TCGA.
-3. **run-THInCR-imm-miRNA.vbs**: </br> Analysis of 55 immune landscape features in conjunction with cellular miRNA expression for CESC and HNSC datasets of TCGA.
-4. **run-THInCR-imm-mRNA.vbs**: </br> Analysis of 55 immune landscape features in conjunction with cellular mRNA expression for CESC and HNSC datasets of TCGA.
+3. **run-THInCR-imm-miRNA.vbs**: </br> Analysis of 53 immune landscape features in conjunction with cellular miRNA expression for CESC and HNSC datasets of TCGA.
+4. **run-THInCR-imm-mRNA.vbs**: </br> Analysis of 53 immune landscape features in conjunction with cellular mRNA expression for CESC and HNSC datasets of TCGA.
 5. **run-THInCR-methyl-all.vbs**: </br> Differential probe methylation analysis of cellular genes for CESC and HNSC datasets of TCGA.
 6. **run-THInCR-miRNA.vbs**: </br> Differential gene expression analysis of cellular miRNA for CESC and HNSC datasets of TCGA.
 7. **run-THInCR-mRNA.vbs**: </br> Differential gene expression analysis of cellular mRNA for CESC and HNSC datasets of TCGA.
